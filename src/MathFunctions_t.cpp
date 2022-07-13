@@ -28,18 +28,14 @@ TEST_CASE("CRandomGenerator::getRNDnormal", "[MathFunctions][CRandomGenerator]")
     CRandomGenerator rng{};
     rng.init(123);
     double r_mean{0};
-    double r_min{2};
     constexpr std::size_t n_samples{1024*1024};
     // getRNDnormal returns a normally distributed double
-    // unless it would be negative, in which case it generates a new one
-    // choose mu, sigma here such that this case will rarely occur
-    auto mu = GENERATE(1.0, 2.3);
+    auto mu = GENERATE(0.0, 1.0, 2.3);
     auto sigma = GENERATE(0.02, 0.08);
     std::size_t n_within_1sd{0};
     for (std::size_t i = 0; i < n_samples; ++i) {
         double r{rng.getRNDnormal(mu, sigma)};
         r_mean += r;
-        r_min = std::min(r, r_min);
         if(std::abs(r-mu) < sigma){
             ++n_within_1sd;
         }
@@ -48,8 +44,6 @@ TEST_CASE("CRandomGenerator::getRNDnormal", "[MathFunctions][CRandomGenerator]")
     double r_frac_within_1sd{static_cast<double>(n_within_1sd)/n_samples};
     CAPTURE(mu);
     CAPTURE(sigma);
-    // all values should be non-negative
-    REQUIRE(r_min >= 0);
     // mean value should be approximately mu
     REQUIRE(std::abs(r_mean - mu) < 0.001);
     // ~68% of values should lie within mu +/- sigma

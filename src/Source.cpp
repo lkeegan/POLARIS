@@ -685,7 +685,7 @@ void CSourceStarField::createNextRay(photon_package * pp, CRandomGenerator * ran
 
     pp->setRandomDirection(rand_gen->getRND(), rand_gen->getRND());
 
-    double len = rand_gen->getRNDnormal(0, var);
+    double len = std::abs(rand_gen->getRNDnormal(0, var));
 
     pos = len * pp->getDirection();
     pos += pos;
@@ -729,7 +729,7 @@ void CSourceStarField::createDirectRay(photon_package * pp, CRandomGenerator * r
     double energy;
     uint wID;
 
-    double len = rand_gen->getRNDnormal(0, var);
+    double len = std::abs(rand_gen->getRNDnormal(0, var));
 
     pos = len * pp->getDirection();
     pos += pos;

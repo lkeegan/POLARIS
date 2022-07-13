@@ -5,6 +5,7 @@ on:
     branches: [ master-basic ]
   pull_request:
     branches: [ master-basic ]
+  workflow_dispatch:
 
 defaults:
   run:

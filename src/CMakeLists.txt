@@ -25,7 +25,7 @@ FIND_PACKAGE (CCFITS REQUIRED)
 FIND_PACKAGE (OpenMP REQUIRED)
 
 SET (SRC_FILES CommandParser.cpp Cylindrical.cpp Dust.cpp
-    Faddeeva.cc Grid.cpp GasSpecies.cpp OcTree.cpp OPIATE.cpp
+    Faddeeva.cc Grid.cpp GasSpecies.cpp MathFunctions.cpp OcTree.cpp OPIATE.cpp
     Pipeline.cpp RadiativeTransfer.cpp Source.cpp Spherical.cpp
     Voronoi.cpp Synchrotron.cpp
 )
